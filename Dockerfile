@@ -6,4 +6,4 @@ ADD ./src/app.py /usr/src/app/app.py
 
 WORKDIR /usr/src/app
 
-CMD [ "python", "app.py"]
+CMD [ "python", "-u", "app.py"]
