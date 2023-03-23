@@ -1,1 +1,1 @@
-# storjAppExporter
+# SNOBoard Exporter
