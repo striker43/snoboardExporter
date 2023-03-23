@@ -15,7 +15,7 @@ gbl_next_submit = 0
 
 while True:
     results_list = []
-    for endpoint in NODES:    
+    for endpoint in NODES:
         try:
             apiRequest = json.loads(requests.get(
                 f'http://{endpoint}/api/sno', timeout=5).text)
@@ -30,7 +30,7 @@ while True:
                 "apiRequest": apiRequest,
                 "apiRequestSatellite": apiRequestSatellite,
                 "apiRequestEstimatedPayout": apiRequestEstimatedPayout,
-                "payStubs": apiRequestPaystubs 
+                "payStubs": apiRequestPaystubs
             }
             results_list.append(node)
 
@@ -43,12 +43,17 @@ while True:
         "nodes": results_list
     }
     try:
-        update_call = requests.post('http://localhost:1234/nodes/update', data = json.dumps(transfer_object))
-        print(json.loads(update_call.text))
-        gbl_next_submit = json.loads(update_call.text)['nextUpdate']
+        update_call = requests.post(
+            'https://snoboard.duckdns.org/nodes/update', data=json.dumps(transfer_object))
+        response = json.loads(update_call.text)
+        print(response)
+        if(response['error'] == True):
+            print(response['message'])
+        else:
+            gbl_next_submit = response['nextUpdate']
     except:
-        print('ERROR: Could not reach server.')
+        print('ERROR: Could not reach snoboard server.')
 
-
-    print(f"INFO: Sleeping for {min(1800, abs(gbl_next_submit - time.time()))} seconds")
+    print(
+        f"INFO: Sleeping for {min(1800, abs(gbl_next_submit - time.time()))} seconds")
     time.sleep(min(1800, abs(gbl_next_submit - time.time())))
