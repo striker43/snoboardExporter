@@ -31,3 +31,6 @@ You don't need docker to run the exporter. You can instead just download the app
     
 The exporter was tested with python 3.10, but might also work with other versions.
 
+### Limitations
+Currently, it is recommended to only run one instance of the exporter for one account. The one instance can query an unlimited number of nodes.
+It might also work to have multiple exporters for one account, but this is not tested yet and might lead to unforeseen issues. 
