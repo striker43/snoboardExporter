@@ -29,5 +29,5 @@ You don't need docker to run the exporter. You can instead just download the app
     export NODES_LIST=192.168.188.15:14002,yourdomain.ddns.net:14003
     python ./src/app.py
     
-#### The exporter was tested with python 3.10, but might also work with other versions.
+The exporter was tested with python 3.10, but might also work with other versions.
 
