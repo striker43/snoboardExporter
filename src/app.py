@@ -44,7 +44,11 @@ while True:
     }
     try:
         update_call = requests.post(
-            'https://snoboard.duckdns.org/nodes/update', data=json.dumps(transfer_object))
+            'https://snoboard.duckdns.org/nodes/update',
+            headers={
+                "X-API-Key": "109353c6-6432-4acf-8e77-ef842f64a664"
+            },
+            data=json.dumps(transfer_object))
         response = json.loads(update_call.text)
         print(response)
         if(response['error'] == True):
